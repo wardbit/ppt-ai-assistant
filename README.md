@@ -16,7 +16,7 @@
   </a>
 </p>
 
-> 🤖 AI-powered PowerPoint/WPS plugin with desktop application. Supports multiple LLM providers and knowledge bases.
+> 🤖 AI-powered PowerPoint/WPS plugin with desktop application. Supports any LLM that follows standard API protocols.
 
 ## ✨ Features
 
@@ -34,27 +34,48 @@
 - 🎨 **Layout Optimization**: Suggest and apply better layouts
 - 💡 **Content Expansion**: Expand brief points into detailed content
 
-### Multi-Provider Support
+### 🔌 Flexible API Protocol Support
 
-Connect to 10+ AI providers:
+This project supports **any LLM** that conforms to standard API protocols:
 
-| Provider | Models |
-|----------|--------|
-| OpenAI | GPT-4, GPT-3.5 Turbo |
-| Google Gemini | Gemini Pro, Ultra |
-| 智谱 GLM | GLM-4, GLM-3 Turbo |
-| Moonshot Kimi | Kimi k1.5, k2 |
-| Minimax | MoE Models |
-| 阿里云 DashScope | Qwen, LLaMA |
-| OpenRouter | Unified API |
-| 火山引擎 | Douyin Models |
-| Ollama | Local Models (Llama, Mistral) |
+| Protocol | Compatible Providers |
+|----------|---------------------|
+| **OpenAI Chat Completions** | OpenAI, Anthropic (via translation), Azure OpenAI, Cloudflare Workers AI, Cohere, Fireworks AI, Together AI, Replicate, and **any OpenAI-compatible API** |
+| **Anthropic Messages** | Anthropic Claude, and **any Claude-compatible API** |
+| **Google Gemini** | Google Gemini, and **any Gemini-compatible API** |
+| **Ollama** | Ollama (all local models), and **any Ollama-compatible API** |
+
+#### 🎯 Custom Model Endpoints
+
+You can add **any custom model endpoint** as long as it follows one of these protocols:
+
+```typescript
+// Example: Add a custom provider
+{
+  type: 'custom',
+  name: 'My Custom Model',
+  apiKey: 'your-api-key',
+  baseUrl: 'https://your-custom-api.com/v1',  // OpenAI compatible
+  model: 'your-model-name'
+}
+```
+
+#### Supported Model Examples
+
+| Model Series | Examples |
+|--------------|----------|
+| **OpenAI** | GPT-5, GPT-5.2, GPT-5.1, o3, o4-mini, GPT-4o, GPT-4o-mini, GPT-4.1 |
+| **Anthropic** | Claude Opus 4, Claude Sonnet 4, Claude Haiku |
+| **Google** | Gemini 2.5 Pro, Gemini 2.0 Flash, Gemini 1.5 Pro |
+| **Local (Ollama)** | Llama 4, Mistral, Qwen 3, Phi 4, DeepSeek, Gemma 3 |
+| **Chinese Models** | 智谱 GLM-4/GLM-4V, Moonshot Kimi, 阿里 Qwen, 豆包, Minimax |
 
 ### Knowledge Base
 
 - 🔍 **Qdrant**: Vector database for semantic search
 - 📚 **Dify**: LLMOps platform integration
 - 🧠 **RAGflow**: RAG engine integration
+- 💾 **Local Embeddings**: Support for local embedding models
 
 ### Local-First
 
@@ -94,7 +115,7 @@ pnpm dev
 ### Quick Start
 
 1. Launch the desktop application
-2. Configure your AI provider (API key)
+2. Add your custom API endpoint (any OpenAI/Anthropic/Gemini/Ollama compatible API)
 3. Start chatting to generate presentations!
 
 ## 📖 Documentation
