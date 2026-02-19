@@ -12,7 +12,16 @@ export type ProviderType =
   | 'dashscope'
   | 'openrouter'
   | 'volcano'
-  | 'ollama';
+  | 'ollama'
+  | 'grok'
+  | 'custom';
+
+export type ImageProviderType =
+  | 'openai-image'
+  | 'falai'
+  | 'google-image'
+  | 'anthropic'
+  | 'custom-image';
 
 export interface ProviderConfig {
   type: ProviderType;
@@ -62,6 +71,40 @@ export interface StreamChunk {
     delta: Partial<ChatMessage>;
     finishReason?: string;
   }[];
+}
+
+// ============================================
+// Image Generation Types
+// ============================================
+
+export interface ImageGenerationRequest {
+  prompt: string;
+  negativePrompt?: string;
+  number?: number;
+  size?: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
+  quality?: 'standard' | 'hd' | 'ultra';
+  style?: string;
+  model?: string;
+}
+
+export interface ImageGenerationResponse {
+  id: string;
+  created: number;
+  model: string;
+  images: {
+    url: string;
+    revisedPrompt?: string;
+  }[];
+  pending?: boolean;
+  requestId?: string;
+}
+
+export interface ImageProviderConfig {
+  type: ImageProviderType;
+  apiKey: string;
+  baseUrl?: string;
+  model: string;
+  enabled: boolean;
 }
 
 // ============================================
