@@ -40,7 +40,7 @@ This project supports **any LLM** that conforms to standard API protocols:
 
 | Protocol | Compatible Providers |
 |----------|---------------------|
-| **OpenAI Chat Completions** | OpenAI, Anthropic (via translation), Azure OpenAI, Cloudflare Workers AI, Cohere, Fireworks AI, Together AI, Replicate, and **any OpenAI-compatible API** |
+| **OpenAI Chat Completions** | OpenAI, Azure OpenAI, Cloudflare Workers AI, Cohere, Fireworks AI, Together AI, Replicate, and **any OpenAI-compatible API** |
 | **Anthropic Messages** | Anthropic Claude, and **any Claude-compatible API** |
 | **Google Gemini** | Google Gemini, and **any Gemini-compatible API** |
 | **Ollama** | Ollama (all local models), and **any Ollama-compatible API** |
@@ -62,13 +62,13 @@ You can add **any custom model endpoint** as long as it follows one of these pro
 
 #### Supported Model Examples
 
-| Model Series | Examples |
-|--------------|----------|
-| **OpenAI** | GPT-5, GPT-5.2, GPT-5.1, o3, o4-mini, GPT-4o, GPT-4o-mini, GPT-4.1 |
-| **Anthropic** | Claude Opus 4, Claude Sonnet 4, Claude Haiku |
-| **Google** | Gemini 2.5 Pro, Gemini 2.0 Flash, Gemini 1.5 Pro |
-| **Local (Ollama)** | Llama 4, Mistral, Qwen 3, Phi 4, DeepSeek, Gemma 3 |
-| **Chinese Models** | 智谱 GLM-4/GLM-4V, Moonshot Kimi, 阿里 Qwen, 豆包, Minimax |
+| Model Series | Latest Models |
+|--------------|---------------|
+| **OpenAI** | GPT-5.3, GPT-5.2, GPT-5.1, o4-mini, GPT-4o, GPT-4o-mini |
+| **Anthropic** | Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku |
+| **Google** | Gemini 3.5 Pro, Gemini 3.0 Flash, Gemini 2.0 Flash |
+| **Local (Ollama)** | Qwen 3, Mistral, Phi 4, DeepSeek, Gemma 3 |
+| **Chinese Models** | 智谱 GLM-5, Moonshot Kimi 2.5, 阿里 Qwen 3.5, 豆包, Minimax 2.5 |
 
 ### Knowledge Base
 
@@ -144,9 +144,9 @@ ppt-ai-assistant/
 ├── packages/
 │   ├── core/                 # Shared business logic
 │   │   ├── ai-providers/    # LLM provider implementations
-│   │   ├── knowledge-base/   # RAG integrations
-│   │   ├── ppt-engine/      # PPT generation
-│   │   └── storage/         # SQLite operations
+│   │   ├── knowledge-base   # RAG integrations
+│   │   ├── ppt-engine       # PPT generation
+│   │   └── storage          # SQLite operations
 │   ├── ui/                  # Shared Vue components
 │   └── types/               # TypeScript types
 ├── openspec/                # OpenSpec documentation
