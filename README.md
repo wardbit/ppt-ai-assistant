@@ -16,7 +16,7 @@
   </a>
 </p>
 
-> 🤖 AI-powered PowerPoint/WPS plugin with desktop application. Supports any LLM that follows standard API protocols.
+> 🤖 AI-powered PowerPoint/WPS plugin with desktop application. Supports any LLM and image generation API that follows standard protocols.
 
 ## ✨ Features
 
@@ -28,6 +28,7 @@
 ### AI Capabilities
 
 - 📝 **Smart Generation**: Create presentations from natural language
+- 🖼️ **Image Generation**: Generate images for PPT materials using AI
 - 🌐 **Translation**: Translate presentation content between languages
 - 📋 **Summarization**: Generate executive summaries and key points
 - ✏️ **Proofreading**: Smart grammar and style checking
@@ -36,21 +37,34 @@
 
 ### 🔌 Flexible API Protocol Support
 
-This project supports **any LLM** that conforms to standard API protocols:
+This project supports **any LLM** and **any Image Generation API** that conforms to standard protocols:
+
+#### Text Generation (LLM)
 
 | Protocol | Compatible Providers |
 |----------|---------------------|
 | **OpenAI Chat Completions** | OpenAI, Azure OpenAI, Cloudflare Workers AI, Cohere, Fireworks AI, Together AI, Replicate, and **any OpenAI-compatible API** |
 | **Anthropic Messages** | Anthropic Claude, and **any Claude-compatible API** |
 | **Google Gemini** | Google Gemini, and **any Gemini-compatible API** |
+| **Grok** | xAI Grok, and **any Grok-compatible API** |
 | **Ollama** | Ollama (all local models), and **any Ollama-compatible API** |
+
+#### Image Generation
+
+| Protocol | Compatible Providers |
+|----------|---------------------|
+| **OpenAI Images** | OpenAI DALL-E |
+| **Anthropic Images** | Anthropic (via API) |
+| **Google Images** | Google Imagen |
+| **fal.ai** | fal.ai (Leonardo, Stable Diffusion, etc.), and **any fal.ai-compatible API** |
+| **Custom** | Any image generation API following above protocols |
 
 #### 🎯 Custom Model Endpoints
 
 You can add **any custom model endpoint** as long as it follows one of these protocols:
 
 ```typescript
-// Example: Add a custom provider
+// Example: Add a custom LLM provider
 {
   type: 'custom',
   name: 'My Custom Model',
@@ -58,17 +72,31 @@ You can add **any custom model endpoint** as long as it follows one of these pro
   baseUrl: 'https://your-custom-api.com/v1',  // OpenAI compatible
   model: 'your-model-name'
 }
+
+// Example: Add a custom image generation provider
+{
+  type: 'image-custom',
+  name: 'My Image API',
+  apiKey: 'your-api-key',
+  baseUrl: 'https://your-image-api.com/v1',
+  model: 'your-image-model'
+}
 ```
 
 #### Supported Model Examples
 
-| Model Series | Latest Models |
-|--------------|---------------|
-| **OpenAI** | GPT-5.3, GPT-5.2, GPT-5.1, o4-mini, GPT-4o, GPT-4o-mini |
-| **Anthropic** | Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku |
-| **Google** | Gemini 3.5 Pro, Gemini 3.0 Flash, Gemini 2.0 Flash |
-| **Local (Ollama)** | Qwen 3, Mistral, Phi 4, DeepSeek, Gemma 3 |
-| **Chinese Models** | 智谱 GLM-5, Moonshot Kimi 2.5, 阿里 Qwen 3.5, 豆包, Minimax 2.5 |
+| Type | Model Series | Latest Models |
+|------|--------------|---------------|
+| **LLM** | **OpenAI** | GPT-5.3, GPT-5.2, o4-mini, GPT-4o |
+| | **Anthropic** | Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku |
+| | **Google** | Gemini 3.5 Pro, Gemini 3.0 Flash |
+| | **xAI** | Grok 3, Grok 2 |
+| | **Local (Ollama)** | Qwen 3, Mistral, Phi 4, DeepSeek |
+| | **Chinese** | 智谱 GLM-5, Kimi 2.5, 阿里 Qwen 3.5, Minimax 2.5 |
+| **Image** | **OpenAI** | DALL-E 3, DALL-E 2 |
+| | **Google** | Imagen 3, Imagen 2 |
+| | **fal.ai** | Leonardo, Stable Diffusion XL, Playground v2 |
+| | **Custom** | Any compatible API |
 
 ### Knowledge Base
 
@@ -115,8 +143,8 @@ pnpm dev
 ### Quick Start
 
 1. Launch the desktop application
-2. Add your custom API endpoint (any OpenAI/Anthropic/Gemini/Ollama compatible API)
-3. Start chatting to generate presentations!
+2. Add your custom API endpoints (any LLM/Image API following standard protocols)
+3. Start chatting to generate presentations and images!
 
 ## 📖 Documentation
 
@@ -144,9 +172,10 @@ ppt-ai-assistant/
 ├── packages/
 │   ├── core/                 # Shared business logic
 │   │   ├── ai-providers/    # LLM provider implementations
-│   │   ├── knowledge-base   # RAG integrations
-│   │   ├── ppt-engine       # PPT generation
-│   │   └── storage          # SQLite operations
+│   │   ├── image-providers/ # Image generation providers
+│   │   ├── knowledge-base/  # RAG integrations
+│   │   ├── ppt-engine/      # PPT generation
+│   │   └── storage/         # SQLite operations
 │   ├── ui/                  # Shared Vue components
 │   └── types/               # TypeScript types
 ├── openspec/                # OpenSpec documentation
